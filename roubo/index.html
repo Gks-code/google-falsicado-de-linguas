@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Explorer</title>
+    <meta name="description"
+        content="Explore the world's 7,000+ languages through an interactive 3D globe visualization.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500&family=Roboto:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/globe.gl"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Globe Container -->
+        <div id="globeViz"></div>
+
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <div class="nav-left">
+                <span class="site-title">Language Explorer</span>
+            </div>
+            <div class="nav-right">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#research" class="nav-link">Research paper</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </div>
+        </nav>
+
+        <!-- Main Content Overlay -->
+        <main class="content-overlay">
+            <!-- Hero Title -->
+            <h1 class="hero-title">Explore the world's languages</h1>
+
+            <!-- Search and Filters -->
+            <div class="search-section">
+                <div class="search-box">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM18 18l-4.35-4.35" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Search languages, countries, regions..." />
+                </div>
+
+                <div class="filter-pills">
+                    <button class="pill" data-filter="language">
+                        <span>Language</span>
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                            <path d="M6 9L2 5h8z" />
+                        </svg>
+                    </button>
+                    <button class="pill" data-filter="country">
+                        <span>Country</span>
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                            <path d="M6 9L2 5h8z" />
+                        </svg>
+                    </button>
+                    <button class="pill" data-filter="region">
+                        <span>Region</span>
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                            <path d="M6 9L2 5h8z" />
+                        </svg>
+                    </button>
+                    <button class="pill" data-filter="speakers">
+                        <span>Number of speakers</span>
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                            <path d="M6 9L2 5h8z" />
+                        </svg>
+                    </button>
+                    <button class="pill" data-filter="status">
+                        <span>Endangerment status</span>
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                            <path d="M6 9L2 5h8z" />
+                        </svg>
+                    </button>
+                    <button class="pill" data-filter="script">
+                        <span>Script</span>
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                            <path d="M6 9L2 5h8z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Stats Panel -->
+        <aside class="stats-panel">
+            <h3 class="stats-title">LINGUAMETA</h3>
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-value" id="langCount">7,168</div>
+                    <div class="stat-label">Languages</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="popCount">8.0B</div>
+                    <div class="stat-label">Population</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="countryCount">195</div>
+                    <div class="stat-label">Countries</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="scriptCount">159</div>
+                    <div class="stat-label">Scripts</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Modals -->
+        <div id="aboutModal" class="modal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <button class="modal-close">&times;</button>
+                <h2>About Language Explorer</h2>
+                <p>Google is bringing the world's 7,000+ languages online to help make information more accessible for
+                    everyone. Language Explorer is an interactive visualization of the world's linguistic diversity,
+                    powered by LinguaMeta.</p>
+                <p>LinguaMeta is a unified resource for language data developed by Google Research. It provides metadata
+                    on language distribution, speaker populations, and vitality status.</p>
+            </div>
+        </div>
+
+        <div id="researchModal" class="modal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <button class="modal-close">&times;</button>
+                <h2>Research Paper</h2>
+                <p>This research paper details the introduction of LinguaMeta, a unified resource for language data
+                    developed by Google Research. LinguaMeta is an open-source repository of language metadata,
+                    including language codes, number of speakers, writing systems, official endangerment status, and
+                    more.</p>
+                <a href="https://aclanthology.org/2024.lrec-main.921v2.pdf" target="_blank" class="btn-primary">Read the
+                    paper</a>
+            </div>
+        </div>
+
+        <div id="faqModal" class="modal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <button class="modal-close">&times;</button>
+                <h2>FAQ</h2>
+                <div class="faq-item">
+                    <h4>What is Google Language Explorer?</h4>
+                    <p>It's a platform for exploring linguistic diversity through an immersive geographical interface,
+                        highlighting efforts to bring more languages online.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What is LinguaMeta?</h4>
+                    <p>LinguaMeta is the underlying dataset providing metadata for global languages, developed
+                        specifically for research and accessibility.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How should I cite this data?</h4>
+                    <p>Please refer to the 2024 LREC-COLING paper for official citation guidelines.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dropdown Menu -->
+        <div id="dropdown" class="dropdown-menu"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="country-card.js"></script>
+</body>
+
+</html>
